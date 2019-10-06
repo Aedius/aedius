@@ -14,7 +14,7 @@ before_install:
   - kubectl config set-credentials k8s --client-certificate=$KUBECTL_CC --client-key=$KUBECTL_CK
   - kubectl config set-context k8s --cluster=k8s --user=k8s
   - kubectl config use-context k8s
-  - helm init --upgrade --carany-image
+  - helm init --upgrade --canary-image
 
 script:
   - docker login docker.pkg.github.com -u ${DOCKER_USER} -p ${DOCKER_TOKEN}
