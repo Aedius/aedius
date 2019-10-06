@@ -11,7 +11,7 @@ before_install:
   - sudo mv ./linux-amd64/helm /usr/local/bin/helm
   - kubectl config set-cluster k8s --server=$KUBECTL_CLUSTER
   - kubectl config set clusters.k8s.certificate-authority-data $KUBECTL_CA
-  - kubectl config set-credentials k8s --tokene=$KUBECTL_TOKEN
+  - kubectl config set-credentials k8s --token=$KUBECTL_TOKEN
   - kubectl config set-context k8s --cluster=k8s --user=k8s
   - kubectl config use-context k8s
   - helm init --upgrade --canary-image
