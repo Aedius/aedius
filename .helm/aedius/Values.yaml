@@ -1,0 +1,4 @@
+images:
+  aedius:
+    repository: docker.pkg.github.com/aedius/aedius/static
+    tag: 1

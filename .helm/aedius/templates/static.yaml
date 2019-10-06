@@ -1,0 +1,51 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: static
+  name: aedius
+  labels:
+    app: aedius
+    chart: {{ .Chart.Name | quote }}
+    release: {{ .Release.Name | quote }}
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+  selector:
+    app: aedius
+    chart: {{ .Chart.Name | quote }}
+    release: {{ .Release.Name | quote }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aedius-static
+  namespace: static
+  labels:
+    app: aedius
+    chart: {{ .Chart.Name | quote }}
+    release: {{ .Release.Name | quote }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aedius
+      chart: {{ .Chart.Name | quote }}
+      release: {{ .Release.Name | quote }}
+  template:
+    metadata:
+      labels:
+        app: aedius
+        chart: {{ .Chart.Name | quote }}
+        release: {{ .Release.Name | quote }}
+    spec:
+      containers:
+        - name: aedius
+          image: "{{ (index .Values.images "aedius").repository }}:{{ (index .Values.images "aedius").tag }}"
+          ports:
+            - containerPort: 8080
+      imagePullSecrets:
+        - name: github-docker-login

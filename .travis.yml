@@ -1,7 +1,23 @@
 services:
   - docker
 
+before_install:
+  - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+  - chmod +x ./kubectl
+  - sudo mv ./kubectl /usr/local/bin/kubectl
+  - curl -LO https://get.helm.sh/helm-canary-linux-amd64.tar.gz
+  - tar xvzf helm-canary-linux-amd64.tar.gz
+  - chmod +x ./linux-amd64/helm
+  - sudo mv ./linux-amd64/helm /usr/local/bin/helm
+  - kubectl config set-cluster k8s --server=$KUBECTL_CLUSTER
+  - kubectl config set clusters.k8s.certificate-authority-data $KUBECTL_CA
+  - kubectl config set-credentials k8s --client-certificate=$KUBECTL_CC --client-key=$KUBECTL_CK
+  - kubectl config set-context k8s --cluster=k8s --user=k8s
+  - kubectl config use-context k8s
+  - helm init --upgrade --carany-image
+
 script:
   - docker login docker.pkg.github.com -u ${DOCKER_USER} -p ${DOCKER_TOKEN}
   - docker build -t docker.pkg.github.com/aedius/aedius/static:${TRAVIS_BUILD_NUMBER} .
   - docker push docker.pkg.github.com/aedius/aedius/static:${TRAVIS_BUILD_NUMBER}
+  - .helm/deploy.sh
