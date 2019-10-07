@@ -19,7 +19,7 @@ before_install:
   - kubectl config set-credentials k8s --token=$KUBECTL_TOKEN
   - kubectl config set-context k8s --cluster=k8s --user=k8s
   - kubectl config use-context k8s
-  - helm init --upgrade --canary-image
+  - helm init --upgrade --wait --canary-image --service-account admin-account
 
 script:
   - docker login docker.pkg.github.com -u ${DOCKER_USER} -p ${DOCKER_TOKEN}
