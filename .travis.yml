@@ -17,7 +17,7 @@ before_install:
   - kubectl config set-cluster k8s --server=$KUBECTL_CLUSTER
   - kubectl config set clusters.k8s.certificate-authority-data $KUBECTL_CA
   - kubectl config set-credentials k8s --token=$KUBECTL_TOKEN
-  - kubectl config set-context k8s --cluster=k8s --user=$KUBECTL_USER
+  - kubectl config set-context k8s --cluster=k8s --user=k8s
   - kubectl config use-context k8s
   - cat ~/.kube/config
   - helm init --upgrade --canary-image
