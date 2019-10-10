@@ -12,8 +12,9 @@ spec:
   type: ClusterIP
   ports:
     - name: http
+      protocol: TCP
       port: 80
-      targetPort: 8080
+      targetPort: 80
   selector:
     app: aedius
     chart: {{ .Chart.Name | quote }}
@@ -46,6 +47,6 @@ spec:
         - name: aedius
           image: "{{ (index .Values.images "aedius").repository }}:{{ (index .Values.images "aedius").tag }}"
           ports:
-            - containerPort: 8080
+            - containerPort: 80
       imagePullSecrets:
         - name: github-docker-login
