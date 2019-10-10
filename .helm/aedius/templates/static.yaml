@@ -9,12 +9,13 @@ metadata:
     chart: {{ .Chart.Name | quote }}
     release: {{ .Release.Name | quote }}
 spec:
-  type: ClusterIP
+  type: NodePort
   ports:
     - name: http
       protocol: TCP
       port: 80
-      targetPort: 80
+      targetPort: 8081
+      nodePort: 30100
   selector:
     app: aedius
     chart: {{ .Chart.Name | quote }}
@@ -47,6 +48,6 @@ spec:
         - name: aedius
           image: "{{ (index .Values.images "aedius").repository }}:{{ (index .Values.images "aedius").tag }}"
           ports:
-            - containerPort: 80
+            - containerPort: 8081
       imagePullSecrets:
         - name: github-docker-login
