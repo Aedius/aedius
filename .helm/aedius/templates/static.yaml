@@ -9,6 +9,7 @@ metadata:
     chart: {{ .Chart.Name | quote }}
     release: {{ .Release.Name | quote }}
 spec:
+  type: LoadBalancer
   selector:
     app: aedius
     chart: {{ .Chart.Name | quote }}
