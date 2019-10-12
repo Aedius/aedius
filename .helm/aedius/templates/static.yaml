@@ -19,6 +19,7 @@ spec:
       protocol: TCP
       port: 80
       targetPort: 8081
+      nodePort: 31111
   externalIPs:
     - 51.254.129.65
 ---
