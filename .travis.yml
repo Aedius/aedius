@@ -22,6 +22,6 @@ before_install:
 
 script:
   - docker login docker.pkg.github.com -u ${DOCKER_USER} -p ${DOCKER_TOKEN}
-  - docker build -t docker.pkg.github.com/aedius/aedius/static:${TRAVIS_BUILD_NUMBER} .
+  - docker build -f .docker/dockerfile -t docker.pkg.github.com/aedius/aedius/static:${TRAVIS_BUILD_NUMBER} .
   - docker push docker.pkg.github.com/aedius/aedius/static:${TRAVIS_BUILD_NUMBER}
   - .helm/deploy.sh
