@@ -1,7 +1,8 @@
-FROM nginx
+FROM nginx:alpine
 
-WORKDIR /website
+RUN rm /etc/nginx/conf.d/default.conf
 
-COPY static /website/
+COPY conf/static.conf /etc/nginx/conf.d/default.conf
+COPY static /usr/share/nginx/html
 
-EXPOSE 80
+EXPOSE 8081
