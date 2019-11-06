@@ -2,3 +2,6 @@ images:
   aedius:
     repository: docker.pkg.github.com/aedius/aedius/static
     tag: 1
+  proxy:
+    repository: docker.pkg.github.com/aedius/aedius/proxy
+    tag: 1

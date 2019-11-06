@@ -18,8 +18,6 @@ spec:
       protocol: TCP
       port: 8081
       targetPort: 8081
-  externalIPs:
-    - 51.254.129.65
 ---
 apiVersion: apps/v1
 kind: Deployment
