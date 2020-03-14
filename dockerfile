@@ -5,4 +5,4 @@ RUN rm /etc/nginx/conf.d/default.conf
 COPY config/static.conf /etc/nginx/conf.d/default.conf
 COPY static /usr/share/nginx/html
 
-EXPOSE 8081
+EXPOSE 80
